@@ -16,6 +16,9 @@ spec:
       - name: chatbot
         image: chatbot:latest
         imagePullPolicy: Never
+        volumeMounts:
+        - name: model-storage
+          mountPath: /models/qwen
         resources:
           limits:
             nvidia.com/gpu: 1
@@ -33,6 +36,11 @@ spec:
             port: 8000
           initialDelaySeconds: 60
           periodSeconds: 10
+      volumes:
+      - name: model-storage
+        hostPath:
+          path: ~/huggingface_models/Qwen-Qwen2.5-7B-Instruct/
+          type: Directory
 ---
 apiVersion: v1
 kind: Service

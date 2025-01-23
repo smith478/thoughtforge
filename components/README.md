@@ -57,3 +57,39 @@ kubectl exec -it <pod-name> -- nvidia-smi
 # Or on your host machine
 watch -n 1 nvidia-smi
 ```
+
+## Chat on Mac 
+
+### Prerequisites
+
+```bash
+brew install docker --cask
+brew install kubectl
+brew install helm
+brew install minikube
+```
+
+### Build and Deploy
+
+- Start Kubernetes
+```bash
+minikube start --driver=docker
+```
+
+- Deploy to Kubernetes
+```bash
+kubectl apply -f ollama-deployment.yaml
+kubectl apply -f ollama-service.yaml
+```
+
+- Test and verify
+```bash
+kubectl get deployments
+kubectl get pods
+```
+
+- Access the service
+```bash
+# Port-forward to local machine
+kubectl port-forward svc/ollama-service 11434:11434
+```

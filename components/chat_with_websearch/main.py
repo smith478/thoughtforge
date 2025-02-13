@@ -1,6 +1,7 @@
 import gradio as gr
 import requests
 import ollama
+
 def search_web(query: str) -> list:
     SEARXNG_URL = "http://localhost:4000/search"
     params = {'q': query, 'format': 'json'}
@@ -13,6 +14,7 @@ def search_web(query: str) -> list:
         print("Response text:", response.text)
         raise Exception(f"Search query failed with status code {response.status_code}")
     return response.json().get("results", [])
+
 def chat_with_search(query: str, use_web_search: bool):
     # Optionally integrate web search based on user toggle
     if use_web_search:
@@ -20,7 +22,8 @@ def chat_with_search(query: str, use_web_search: bool):
         context_str = format_search_results(results, max_results=5)
     else:
         context_str = "No additional context provided."
-return generate_augmented_response(query, context_str)
+    return generate_augmented_response(query, context_str)
+
 def format_search_results(results: list, max_results: int = 5) -> str:
     """
     Format the top search results into a context string.
@@ -32,6 +35,7 @@ def format_search_results(results: list, max_results: int = 5) -> str:
         snippet = result.get("content", "No snippet")
         formatted.append(f"Title: {title}\nURL: {url}\nSnippet: {snippet}")
     return "\n\n".join(formatted)
+
 def generate_augmented_response(query: str, context: str) -> str:
     """
     Combine the user's query with the search context and send it to DeepSeek R1 via Ollama.
@@ -49,6 +53,7 @@ Answer:"""
         ]
     )
     return response["message"]["content"]
+
 iface = gr.Interface(
     fn=chat_with_search,
     inputs=[

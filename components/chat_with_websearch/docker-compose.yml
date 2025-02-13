@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  searxng:
+    image: docker.io/searxng/searxng:latest
+    container_name: searxng
+    ports:
+      - "4000:8080"
+    volumes:
+      - ./searxng:/etc/searxng
+    restart: unless-stopped

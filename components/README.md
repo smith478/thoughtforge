@@ -93,3 +93,13 @@ kubectl get pods
 # Port-forward to local machine
 kubectl port-forward svc/ollama-service 11434:11434
 ```
+
+## Chat with Web Search
+
+The idea here is to add web search ability to our chatbot, so that when answering questions it also has access to the internet.
+
+This will use the following tools
+- DeepSeek R1 distill (for chat)
+- Ollama to host the model
+- Docker to host the service
+- SearXNG for the search engine

@@ -1,3 +1,11 @@
+## Autogen
+We will use Microsoft autogen which is a tool to help with building agentic services. The model service will be hosted with Ollama.
+
+To test API connectivity, run the following `curl` command from within the container to the host Ollama endpoint:
+```bash
+curl http://host.docker.internal:4000
+```
+
 ## Chat service
 
 One of the core components will be a chat service. We will set this up to use Kubernetes.

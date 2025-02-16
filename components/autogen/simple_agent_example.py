@@ -3,7 +3,7 @@ from autogen import AssistantAgent, UserProxyAgent, config_list_from_json
 # Configuration for Ollama
 config_list = [
     {
-        "model": "deepseek-r1:7b",
+        "model": "qwen2.5:latest",
         "base_url": "http://localhost:11434/v1/",
         "api_key": "ollama", 
     }

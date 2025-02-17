@@ -33,9 +33,26 @@ user_proxy = UserProxyAgent(
 
 CLINICAL_QUESTION = "What is the prognosis for hemangiosaracoma in dogs?"
 TASK_1 = f"Find research papers to help answer the following question: {CLINICAL_QUESTION}"
+TASK_2 = "Execute code to fetch a list of the top 10 to 20 papers that are most relevant to the question."
+TASK_3 = f"Sythesize the information from the papers and provide an answer to: {CLINICAL_QUESTION}. Provide references (as links) from the papers."
+TASK_4 = """Reflect on the sequence and create a recipe containing all of the steps necessary and name for it. Suggest well-documented, generalized Python function(s) to perform similar tasks for coding steps in the future. Make sure coding and non-coding steps are never mixed in one function. In the docstring of the function(s), clarify what non-coding steps are needed to use the language skill of the assistant."""
 
-# Start conversation
+# Start looking for research papers
 user_proxy.initiate_chat(
     assistant,
     message=TASK_1
+)
+
+# Execute code to fetch the top 10 to 20 papers
+user_proxy.initiate_chat(
+    assistant,
+    message=TASK_2,
+    clear_history=False
+)
+
+# Answer the clinical question with references
+user_proxy.initiate_chat(
+    assistant,
+    message=TASK_3,
+    clear_history=False
 )
